@@ -1,3 +1,5 @@
+package com.github.muhin007.coldplace;
+
 import java.util.Scanner;
 
 public class Scanner {

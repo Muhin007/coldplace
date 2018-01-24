@@ -3,9 +3,9 @@ import java.util.Scanner;
 
 public class Scanner {
     public static void main(String[] args) {
-        System.out.print("Введите город: ");
-        Scanner sc = new Scanner(System.in);
-        String city = scanner.nextInt();
-        System.out.print("Вы указали город: " + city);
+        Scanner in = new Scanner(System.in);
+        System.out.print("Введите название города: ");
+        String city = in.nextLine();
+        System.out.println("Вы указали город: " + city);
     }
     }

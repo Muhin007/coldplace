@@ -3,7 +3,7 @@ package com.github.muhin007.coldplace;
 import java.util.ArrayList;
 import java.util.List;
 
-class list{
+class List{
 
     public static void main(String[] args) {
         List<String> list = new ArrayList<>();

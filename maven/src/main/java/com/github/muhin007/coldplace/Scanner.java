@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
-
 public class Scanner {
+    
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.print("Введите название города: ");

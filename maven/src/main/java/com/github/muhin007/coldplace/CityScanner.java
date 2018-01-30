@@ -3,10 +3,8 @@ package com.github.muhin007.coldplace;
 import java.util.Scanner;
 
 public class CityScanner {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.print("Введите название города: ");
-        String city = in.nextLine();
-        System.out.println("Вы указали город: " + city);
-    }
+    Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите любой город ");
+    String city = sc.nextLine();
+        System.out.println("Вы ввели город " + city);
 }

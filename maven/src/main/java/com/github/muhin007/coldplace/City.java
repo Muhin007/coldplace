@@ -1,6 +1,6 @@
 package com.github.muhin007.coldplace;
 
-public class City {
+class City {
 
     String name;
     int minTemperature;

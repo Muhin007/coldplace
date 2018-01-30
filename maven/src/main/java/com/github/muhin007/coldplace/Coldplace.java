@@ -30,6 +30,6 @@ public class Coldplace {
         } else {
             System.out.println("Сейчас в " + name + " " + x);
 
-        }
+         }
     }
 }

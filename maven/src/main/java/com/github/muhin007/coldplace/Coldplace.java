@@ -12,13 +12,14 @@ public class Coldplace {
 
         List<City> list = new ArrayList<City>();
         list.add(new City("Москва", -20, -5));
+        list.add(new City("Челябинск", -25, -10));
         list.add(new City("Санкт-Петербург", -15, 0));
         list.add(new City("Новосибирск", -25, -15));
         list.add(new City("Магадан", -40, -20));
         list.add(new City("Владивосток", -20, -10));
 
         Random r = new Random();
-        int m1 = r.nextInt();//доработать выдачу случайного числа из диапазона температур для каждого города
+        //int m1 = r.nextInt();//доработать выдачу случайного числа из диапазона температур для каждого города
         int x = r.nextInt(101) - 50;
 
         Scanner sc = new Scanner(System.in);

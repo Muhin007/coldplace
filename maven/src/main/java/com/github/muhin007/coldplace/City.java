@@ -16,7 +16,7 @@ class City {
     double d = (Math.abs(city.maxTemperature - city.minTemperature) * r.nextDouble()) + city.minTemperature;
     int i = (int) d;
      */
-//
+
 //    @Override
 //    public boolean equals(Object o) {
 //        if (o == this) {

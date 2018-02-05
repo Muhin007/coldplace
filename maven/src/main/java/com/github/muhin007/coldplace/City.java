@@ -2,22 +2,17 @@ package com.github.muhin007.coldplace;
 
 class City {
 
-    String name;
-    int minTemperature;
-    int maxTemperature;
+    public String name;
+    public int minTemperature;
+    public int maxTemperature;
 
     City(String name, int minTemperature, int maxTemperature) {
         this.name = name;
         this.minTemperature = minTemperature;
         this.maxTemperature = maxTemperature;
     }
-    /*
-    City city = list.get(0);
-    double d = (Math.abs(city.maxTemperature - city.minTemperature) * r.nextDouble()) + city.minTemperature;
-    int i = (int) d;
-     */
-//
-//    @Override
+
+    //    @Override
 //    public boolean equals(Object o) {
 //        if (o == this) {
 //            return true;

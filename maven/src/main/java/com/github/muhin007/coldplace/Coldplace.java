@@ -17,12 +17,8 @@ public class Coldplace {
         list.add(new City("Магадан", -40, -20));
         list.add(new City("Владивосток", -20, -10));
 
-        Random r = new Random();
-        int m1 = r.nextInt();//доработать выдачу случайного числа из диапазона температур для каждого города
-        int x = r.nextInt(101) - 50;
-
         Scanner sc = new Scanner(System.in);
-        System.out.print("Введите название города ");
+        System.out.println("Введите название города ");
         String name = sc.nextLine();
 
         City foundedCity = null;
@@ -33,11 +29,19 @@ public class Coldplace {
             }
         }
 
+//        City city = list.get(0);
+//        double d = (Math.abs(city.maxTemperature - city.minTemperature) * r.nextDouble()) + city.minTemperature;
+//        int i = (int) d;
+
+        Random r = new Random();
+        int i = r.nextInt();//доработать выдачу случайного числа из диапазона температур для каждого города
+        int x = r.nextInt(101) - 50;
+
         if (foundedCity != null) {
             System.out.println("Сейчас в " + name + " " + foundedCity.calculateRandomTemperature());
         } else {
             System.out.println("Сейчас в " + name + " " + x);
 
-         }
+        }
     }
 }

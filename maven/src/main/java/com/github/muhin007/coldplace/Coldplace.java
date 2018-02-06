@@ -10,7 +10,7 @@ public class Coldplace {
     public static void main(String[] args) {
         System.out.println("Программа показывает температуру в запрашиваемом городе");
 
-        List<City> list = new ArrayList<City>();
+        List<City> list = new ArrayList<>();
         list.add(new City("Москва", -20, -5));
         list.add(new City("Челябинск", -25, -10));
         list.add(new City("Санкт-Петербург", -15, 0));
@@ -19,7 +19,6 @@ public class Coldplace {
         list.add(new City("Владивосток", -20, -10));
 
         Random r = new Random();
-        //int m1 = r.nextInt();//доработать выдачу случайного числа из диапазона температур для каждого города
         int x = r.nextInt(101) - 50;
 
         Scanner sc = new Scanner(System.in);
@@ -39,6 +38,7 @@ public class Coldplace {
         } else {
             System.out.println("Сейчас в " + name + " " + x);
 
-         }
+
+        }
     }
 }

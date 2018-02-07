@@ -37,8 +37,12 @@ public class Coldplace {
             System.out.println("Сейчас в " + name + " " + foundedCity.calculateRandomTemperature());
         } else {
             System.out.println("Сейчас в " + name + " " + x);
-
-
         }
+        
+        FileWriter fw = new FileWriter("C:\Dev\Project\coldplace\maven\src\main\java\com\github\muhin007\coldplace\\City.txt");
+
+            fw.write(name + " " + foundedCity.calculateRandomTemperature());
+
+            fw.close();
     }
 }

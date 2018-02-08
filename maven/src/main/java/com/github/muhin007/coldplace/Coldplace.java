@@ -10,15 +10,19 @@ public class Coldplace {
     public static void main(String[] args) {
         System.out.println("Программа показывает температуру в запрашиваемом городе");
 
-        List<City> list = new ArrayList<City>();
+        List<City> list = new ArrayList<>();
         list.add(new City("Москва", -20, -5));
+        list.add(new City("Челябинск", -25, -10));
         list.add(new City("Санкт-Петербург", -15, 0));
         list.add(new City("Новосибирск", -25, -15));
         list.add(new City("Магадан", -40, -20));
         list.add(new City("Владивосток", -20, -10));
 
+        Random r = new Random();
+        int x = r.nextInt(101) - 50;
+
         Scanner sc = new Scanner(System.in);
-        System.out.println("Введите название города ");
+        System.out.print("Введите название города ");
         String name = sc.nextLine();
 
         City foundedCity = null;
@@ -29,19 +33,16 @@ public class Coldplace {
             }
         }
 
-//        City city = list.get(0);
-//        double d = (Math.abs(city.maxTemperature - city.minTemperature) * r.nextDouble()) + city.minTemperature;
-//        int i = (int) d;
-
-        Random r = new Random();
-        int i = r.nextInt();//доработать выдачу случайного числа из диапазона температур для каждого города
-        int x = r.nextInt(101) - 50;
-
         if (foundedCity != null) {
             System.out.println("Сейчас в " + name + " " + foundedCity.calculateRandomTemperature());
         } else {
             System.out.println("Сейчас в " + name + " " + x);
-
         }
+        
+        FileWriter fw = new FileWriter("C:\Dev\Project\coldplace\maven\src\main\java\com\github\muhin007\coldplace\\City.txt");
+
+            fw.write(name + " " + foundedCity.calculateRandomTemperature());
+
+            fw.close();
     }
 }

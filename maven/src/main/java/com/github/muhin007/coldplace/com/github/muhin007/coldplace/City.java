@@ -58,4 +58,12 @@ class City {
     public int calculateRandomTemperature() {
         return 0;
     }
+
+    public int getMaxTemperature() {
+        return maxTemperature;
+    }
+
+    public int getMinTemperature() {
+        return minTemperature;
+    }
 }

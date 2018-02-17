@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Coldplace {
+public class Main {
 
     public static void main(String[] args) throws IOException {
         System.out.println("Программа показывает температуру в запрашиваемом городе");

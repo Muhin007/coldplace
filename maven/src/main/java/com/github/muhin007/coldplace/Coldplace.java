@@ -5,13 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Coldplace {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
         System.out.println("Программа показывает температуру в запрашиваемом городе");
+
 //Создали список городов
         List<City> list = new ArrayList<>();
         list.add(new City("Москва", -20, -5));
@@ -21,26 +20,20 @@ public class Coldplace {
         list.add(new City("Магадан", -40, -20));
         list.add(new City("Владивосток", -20, -10));
 //Записали список городов в файл
-        Writer writer = null;
-        try {
-            writer = new FileWriter("Citylist.txt");
-            for (City list : list) {
-                writer.write();
-                writer.write(System.getProperty("line.separator"));
-            }
-            writer.flush();
-        } catch (Exception e) {
-            Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, e);
-        } finally {
-            if (writer != null) try {
-                writer.close();
-            } catch (IOException ignored) {
-            }
+        FileWriter writer = new FileWriter("Citylist.txt");
+        for (City news : list) {
+            String name = news.getName();
+            int minTemperature = news.getMinTemperature();
+            int maxTemperature = news.getMaxTemperature();
+
+            writer.write(name + " " + minTemperature + " " + maxTemperature + System.getProperty("line.separator"));
         }
+        writer.close();
+
         //Прочитали список городов из файла
         try {
-            File file = new File("Citylist.txt");
-            FileReader fr = new FileReader(file);
+
+            FileReader fr = new FileReader("Citylist.txt");
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
             while (line != null) {
@@ -57,11 +50,11 @@ public class Coldplace {
 //Сравниваем введенный город со списком и получаем случайную температуру
         City city = list.get(0);
         double d = (Math.abs(city.getMaxTemperature() - city.getMinTemperature()) * r.nextDouble()) + city.getMinTemperature();
-        int i;
-        switch ( i = (int) d ) {
+        int i = (int) d;
+        {
         }
         City foundedCity = null;
-        for (City list : list) {
+        for (City city : list) {
             if (city.name.equals(name)) {
                 foundedCity = city;
                 break;
@@ -75,13 +68,8 @@ public class Coldplace {
             System.out.println("Сейчас в " + name + " " + i);
         } else {
             System.out.println("Сейчас в " + name + " " + x);
+
         }
-//Записываем в файл название города и случайное значение температуры
-        FileWriter fw = new FileWriter("C:\\Dev\\Project\\coldplace\\maven\\src\\main\\" +
-                "java\\com\\github\\muhin007\\coldplace\\City.txt");
-
-        fw.write(name + " " + i);
-
-        fw.close();
     }
+}
 }

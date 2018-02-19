@@ -3,7 +3,7 @@ package com.github.muhin007.coldplace;
 class City {
 
 
-    private String name;
+    public String name;
     private int minTemperature;
     private int maxTemperature;
 
@@ -12,7 +12,10 @@ class City {
         this.minTemperature = minTemperature;
         this.maxTemperature = maxTemperature;
     }
-    public String getName() {        return name;    }
+
+    public String getName() {
+        return name;
+    }
 
     public int getMinTemperature() {
         return minTemperature;
@@ -23,9 +26,6 @@ class City {
         return maxTemperature;
     }
 
-    City city = list.get(0);
-    double d = (Math.abs(city.maxTemperature - city.minTemperature) * r.nextDouble()) + city.minTemperature;
-    int i = (int) d;
 
     @Override
     public boolean equals(Object o) {
@@ -43,8 +43,4 @@ class City {
         result = 31 * result + maxTemperature;
         return result;
     }
-
-    public int calculateRandomTemperature() {
-        return 0;
-    }
-
+}

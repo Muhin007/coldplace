@@ -12,7 +12,10 @@ class City {
         this.minTemperature = minTemperature;
         this.maxTemperature = maxTemperature;
     }
-    public String getName() {        return name;    }
+
+    public String getName() {
+        return name;
+    }
 
     public int getMinTemperature() {
         return minTemperature;
@@ -47,4 +50,5 @@ class City {
     public int calculateRandomTemperature() {
         return 0;
     }
+}
 

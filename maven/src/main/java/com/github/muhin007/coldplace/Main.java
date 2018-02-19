@@ -29,6 +29,19 @@ public class Main {
         }
         writer.close();
 
+        try {
+
+            FileReader fr = new FileReader("Citylist.txt");
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            while (line != null) {
+                System.out.println(line);
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Scanner sc = new Scanner(System.in);
         System.out.print("Введите название города ");
         String name = sc.nextLine();

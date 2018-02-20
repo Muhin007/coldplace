@@ -1,9 +1,11 @@
 package com.github.muhin007.coldplace;
 
+import java.util.Random;
+
 class City {
 
 
-    public String name;
+    private String name;
     private int minTemperature;
     private int maxTemperature;
 
@@ -43,4 +45,16 @@ class City {
         result = 31 * result + maxTemperature;
         return result;
     }
+
+    public int calculateRandomTemperature() {
+        Random r = new Random();
+        {
+            int minTemperature = getMinTemperature();
+            int maxTemperature = getMaxTemperature();
+            double d = (Math.abs((maxTemperature - minTemperature) * r.nextDouble()) + minTemperature);
+            int i = (int) d;
+        }
+        return 0;
+    }
 }
+

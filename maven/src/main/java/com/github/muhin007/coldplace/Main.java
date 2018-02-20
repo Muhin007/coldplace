@@ -48,28 +48,21 @@ public class Main {
 
         City foundedCity = null;
         for (City city : list) {
-            if (city.name.equals(name)) {
+            name = city.getName();
+            if (city.getName().equals(name)) {
                 foundedCity = city;
                 break;
             }
         }
-
         Random r = new Random();
-        for (City city :list){
-            int minTemperature = city.getMinTemperature();
-            int maxTemperature = city.getMaxTemperature();
-            double d = (Math.abs((maxTemperature - minTemperature) * r.nextDouble()) + minTemperature);
-            int i = (int) d;
-            int x = r.nextInt(101) - 50;
+        int x = r.nextInt(101) - 50;
 
-
-            if (foundedCity != null) {
-                System.out.println("Сейчас в " + name + " " + i);
-            } else {
-                System.out.println("Сейчас в " + name + " " + x);
-
-            }
+        if (foundedCity != null) {
+            System.out.println("Сейчас в " + name + " " + foundedCity.calculateRandomTemperature());
+        } else {
+            System.out.println("Сейчас в " + name + " " + x);
 
         }
+
     }
 }

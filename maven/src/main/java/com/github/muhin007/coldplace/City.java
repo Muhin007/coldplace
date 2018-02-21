@@ -48,13 +48,11 @@ class City {
 
     public int calculateRandomTemperature() {
         Random r = new Random();
-        {
-            int minTemperature = getMinTemperature();
-            int maxTemperature = getMaxTemperature();
-            double d = (Math.abs((maxTemperature - minTemperature) * r.nextDouble()) + minTemperature);
-            int i = (int) d;
-        }
-        return 0;
+        int minTemperature = getMinTemperature();
+        int maxTemperature = getMaxTemperature();
+        double d = (Math.abs((maxTemperature - minTemperature) * r.nextDouble()) + minTemperature);
+
+        return (int) d;
     }
 }
 

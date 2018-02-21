@@ -48,7 +48,6 @@ public class Main {
 
         City foundedCity = null;
         for (City city : list) {
-            name = city.getName();
             if (city.getName().equals(name)) {
                 foundedCity = city;
                 break;

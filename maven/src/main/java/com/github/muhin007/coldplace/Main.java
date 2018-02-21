@@ -21,6 +21,7 @@ public class Main {
         list.add(new City("Новосибирск", -25, -15));
         list.add(new City("Магадан", -40, -20));
         list.add(new City("Владивосток", -20, -10));
+        list.add(new City("Сочи", 0, 15));
 
         FileWriter writer = new FileWriter("Citylist.txt");
         for (City news : list) {
@@ -34,7 +35,7 @@ public class Main {
 
         try {
 
-            FileReader fr = new FileReader("Citylist.txt");
+            FileReader fr = new FileReader("City.txt");
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
             while (line != null) {

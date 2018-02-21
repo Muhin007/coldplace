@@ -23,7 +23,7 @@ public class Main {
         list.add(new City("Владивосток", -20, -10));
         list.add(new City("Сочи", 0, 15));
 
-        FileWriter writer = new FileWriter("Citylist.txt");
+        FileWriter writer = new FileWriter("C:\\Dev\\Project\\coldplace\\maven\\CityWrite.txt");
         for (City news : list) {
             String name = news.getName();
             int minTemperature = news.getMinTemperature();
@@ -35,7 +35,7 @@ public class Main {
 
         try {
 
-            FileReader fr = new FileReader("City.txt");
+            FileReader fr = new FileReader("C:\\Dev\\Project\\coldplace\\maven\\CityRead.txt");
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
             while (line != null) {
@@ -51,13 +51,13 @@ public class Main {
 
         City foundedCity = null;
         for (City city : list) {
-            if (city.getName().equals(name)) {
+            if (name.equals("C:\\Dev\\Project\\coldplace\\maven\\CityRead.txt")) {
                 foundedCity = city;
                 break;
             }
         }
         Random r = new Random();
-        int x = r.nextInt(101) - 50;
+        int x = r.nextInt(1) - 50;
 
         if (foundedCity != null) {
             System.out.println("Сейчас в " + name + " " + foundedCity.calculateRandomTemperature());

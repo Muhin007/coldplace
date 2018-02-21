@@ -1,6 +1,9 @@
 package com.github.muhin007.coldplace;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -35,7 +38,6 @@ public class Main {
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
             while (line != null) {
-                System.out.println(line);
                 line = reader.readLine();
             }
         } catch (IOException e) {

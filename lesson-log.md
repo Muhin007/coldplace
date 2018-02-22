@@ -1,3 +1,7 @@
+006. 2018/02/22
+Поговортли про тестирование, UnitTests, JUnit, 
+Integration Tests, Functional Tests.
+
 005. 2018/02/15
 Решили вести задачи через issue на github. Надо расписать текущие задачи в 
 issue на github. 

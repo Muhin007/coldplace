@@ -14,31 +14,19 @@ public class Main {
     public static void main(String[] args) throws IOException {
         System.out.println("Программа показывает температуру в запрашиваемом городе");
 
-        List<City> list = new ArrayList<>();
-        list.add(new City("Москва", -20, -5));
-        list.add(new City("Челябинск", -25, -10));
-        list.add(new City("Санкт-Петербург", -15, 0));
-        list.add(new City("Новосибирск", -25, -15));
-        list.add(new City("Магадан", -40, -20));
-        list.add(new City("Владивосток", -20, -10));
-        list.add(new City("Сочи", 0, 15));
-
-        FileWriter writer = new FileWriter("C:\\Dev\\Project\\coldplace\\maven\\CityWrite.txt");
-        for (City news : list) {
-            String name = news.getName();
-            int minTemperature = news.getMinTemperature();
-            int maxTemperature = news.getMaxTemperature();
-
-            writer.write(name + " " + minTemperature + " " + maxTemperature + System.getProperty("line.separator"));
-        }
-        writer.close();
+        List<City> cities = new ArrayList<>();
 
         try {
-
-            FileReader fr = new FileReader("C:\\Dev\\Project\\coldplace\\maven\\CityRead.txt");
+            FileReader fr = new FileReader("CityRead.txt");
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
             while (line != null) {
+                String[] stringsArray = line.split(",", 3);
+                String name= stringsArray[0];
+                int minTemperature = Integer.parseInt(stringsArray[1].trim());
+                int maxTemperature = Integer.parseInt(stringsArray[2].trim());
+                cities.add(new City(name, minTemperature, maxTemperature));
+
                 line = reader.readLine();
             }
         } catch (IOException e) {
@@ -50,20 +38,17 @@ public class Main {
         String name = sc.nextLine();
 
         City foundedCity = null;
-        for (City city : list) {
-            if (name.equals("C:\\Dev\\Project\\coldplace\\maven\\CityRead.txt")) {
+        for (City city : cities) {
+            if (name.equalsIgnoreCase(city.getName())) {
                 foundedCity = city;
                 break;
             }
         }
-        Random r = new Random();
-        int x = r.nextInt(1) - 50;
 
         if (foundedCity != null) {
             System.out.println("Сейчас в " + name + " " + foundedCity.calculateRandomTemperature());
         } else {
-            System.out.println("Сейчас в " + name + " " + x);
-
+            System.out.println("Сейчас в " + name + " " + (new Random().nextInt(1) - 50));
         }
 
     }

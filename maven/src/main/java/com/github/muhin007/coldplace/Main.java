@@ -11,14 +11,12 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         System.out.println("Программа показывает температуру в запрашиваемом городе");
 
         List<City> cities = new ArrayList<>();
 
-        try {
-            FileReader fr = new FileReader("CityRead.txt");
-            BufferedReader reader = new BufferedReader(fr);
+        try(BufferedReader reader = new BufferedReader(new FileReader("CityRead.txt"))) {
             String line = reader.readLine();
             while (line != null) {
                 String[] stringsArray = line.split(",", 3);
@@ -30,7 +28,7 @@ public class Main {
                 line = reader.readLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); //TODO log to file, not show to user
         }
 
         Scanner sc = new Scanner(System.in);

@@ -1,6 +1,9 @@
 package com.github.muhin007.coldplace;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -8,68 +11,43 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         System.out.println("Программа показывает температуру в запрашиваемом городе");
 
-//Создали список городов
-        List<City> list = new ArrayList<>();
-        list.add(new City("Москва", -20, -5));
-        list.add(new City("Челябинск", -25, -10));
-        list.add(new City("Санкт-Петербург", -15, 0));
-        list.add(new City("Новосибирск", -25, -15));
-        list.add(new City("Магадан", -40, -20));
-        list.add(new City("Владивосток", -20, -10));
-//Записали список городов в файл
-        FileWriter writer = new FileWriter("Citylist.txt");
-        for (City news : list) {
-            String name = news.getName();
-            int minTemperature = news.getMinTemperature();
-            int maxTemperature = news.getMaxTemperature();
+        List<City> cities = new ArrayList<>();
 
-            writer.write(name + " " + minTemperature + " " + maxTemperature + System.getProperty("line.separator"));
-        }
-        writer.close();
-
-        //Прочитали список городов из файла
-        try {
-
-            FileReader fr = new FileReader("Citylist.txt");
-            BufferedReader reader = new BufferedReader(fr);
+        try(BufferedReader reader = new BufferedReader(new FileReader("CityRead.txt"))) {
             String line = reader.readLine();
             while (line != null) {
-                System.out.println(line);
+                String[] stringsArray = line.split(",", 3);
+                String name= stringsArray[0];
+                int minTemperature = Integer.parseInt(stringsArray[1].trim());
+                int maxTemperature = Integer.parseInt(stringsArray[2].trim());
+                cities.add(new City(name, minTemperature, maxTemperature));
+
                 line = reader.readLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); //TODO log to file, not show to user
         }
-//Приняли название города с консоли
+
         Scanner sc = new Scanner(System.in);
         System.out.print("Введите название города ");
         String name = sc.nextLine();
-//Сравниваем введенный город со списком и получаем случайную температуру
-        City city = list.get(0);
-        double d = (Math.abs(city.getMaxTemperature() - city.getMinTemperature()) * r.nextDouble()) + city.getMinTemperature();
-        int i = (int) d;
-        {
-        }
+
         City foundedCity = null;
-        for (City city : list) {
-            if (city.name.equals(name)) {
+        for (City city : cities) {
+            if (name.equalsIgnoreCase(city.getName())) {
                 foundedCity = city;
                 break;
             }
         }
-//Ввели случайный выбор температур если введенного города нет в списке
-        Random r = new Random();
-        int x = r.nextInt(101) - 50;
-//выводим на экран название города и случайное значение температуры
-        if (foundedCity != null) {
-            System.out.println("Сейчас в " + name + " " + i);
-        } else {
-            System.out.println("Сейчас в " + name + " " + x);
 
+        if (foundedCity != null) {
+            System.out.println("Сейчас в " + name + " " + foundedCity.calculateRandomTemperature());
+        } else {
+            System.out.println("Сейчас в " + name + " " + (new Random().nextInt(1) - 50));
         }
+
     }
-}
 }

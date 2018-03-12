@@ -24,7 +24,7 @@ public class Main {
 
             List<City> cities = new ArrayList<>();
 
-            try (BufferedReader reader = new BufferedReader(new FileReader("C://Dev//Project//coldplace//CityRead.txt"))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader("CityRead.txt"))) {
                 String line = reader.readLine();
                 while (line != null) {
                     String[] stringsArray = line.split(",", 3);
@@ -43,32 +43,36 @@ public class Main {
             for (City city : cities) {
                 if (args[1].equalsIgnoreCase(city.getName())) {
                     foundedCity = city;
-//                    break;
-                    //}
-                }
-
-                if (foundedCity != null) {
-                    System.out.println("Сейчас в " + args[1] + " " + foundedCity.calculateRandomTemperature());
-                    return;
-                }
-            }
-            if (args[0].equals("--city-list")) {
-                try (BufferedReader in = new BufferedReader(new FileReader("C://Dev//Project//coldplace//CityRead.txt"))) {
-                    String line1;
-                    while ((line1 = in.readLine()) != null) {
-                        System.out.println(line1);
-                        System.exit(0);
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    break;
                 }
             }
 
-                else System.out.println((new Random().nextInt(1) - 50));
-
-
+            if (foundedCity != null) {
+                System.out.println("Сейчас в " + args[1] + " " + foundedCity.calculateRandomTemperature());
+                return;
             }
         }
+        if (args[0].equals("--city-list")) {
+            try {
+
+                FileReader fr = new FileReader("CityRead.txt");
+                BufferedReader reader = new BufferedReader(fr);
+                String line = reader.readLine();
+                while (line != null) {
+                    System.out.println(line);
+                    line = reader.readLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+            System.exit(0);
+        } else {
+            System.out.println((new Random().nextInt(101) - 50));
+        }
+
+
     }
+}
+
 

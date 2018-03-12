@@ -3,62 +3,72 @@ package com.github.muhin007.coldplace;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        if ( args[0].equals("-h") || args[0].equals("--help"))
+        if (args[0].equals("-h") || args[0].equals("--help")) {
+            System.out.println("Программа Coldplace показывает температуру в запрашиваемом городе");
             System.out.println("-h, --help - помощь в использовании ключей командной строки; " +
-                    "-с, --city - температуру в указанном городе; --city-list - список названий городов;" +
-                    " запуск программы без ключа покажет случайную темературу в случайном городе");
-        System.exit(0);
-        if ( args[0].equals("-c") || args[0].equals("--city") )
-            System.out.print(args[1]);
-        System.exit(0);
-        if ( args[0].equals("--city-list") )
-            System.out.println( "Список городов" );
-        System.exit(0);
-        if (args[0] == null)
-            System.out.println( "Случайную температуру");
+                    "-с, --city <Название города> - покажет вам температуру в указанном городе; " +
+                    "--city-list - покажет вам список названий всех доступных городов; " +
+                    "p.s. запуск программы без ключа покажет случайную температуру");
+            return;
+        }
+        if (args[0].equals("-c") || args[0].equals("--city")) {
+            System.out.println("Программа Coldplace показывает температуру в запрашиваемом городе");
 
-        System.out.println("Программа показывает температуру в запрашиваемом городе");
+            List<City> cities = new ArrayList<>();
 
-        List<City> cities = new ArrayList<>();
+            try (BufferedReader reader = new BufferedReader(new FileReader("C://Dev//Project//coldplace//CityRead.txt"))) {
+                String line = reader.readLine();
+                while (line != null) {
+                    String[] stringsArray = line.split(",", 3);
+                    String name = stringsArray[0];
+                    int minTemperature = Integer.parseInt(stringsArray[1].trim());
+                    int maxTemperature = Integer.parseInt(stringsArray[2].trim());
+                    cities.add(new City(name, minTemperature, maxTemperature));
 
-        try(BufferedReader reader = new BufferedReader(new FileReader("C://Dev//Project//coldplace//CityRead.txt"))) {
-            String line = reader.readLine();
-            while (line != null) {
-                String[] stringsArray = line.split(",", 3);
-                String name= stringsArray[0];
-                int minTemperature = Integer.parseInt(stringsArray[1].trim());
-                int maxTemperature = Integer.parseInt(stringsArray[2].trim());
-                cities.add(new City(name, minTemperature, maxTemperature));
-
-                line = reader.readLine();
+                    line = reader.readLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace(); //TODO log to file, not show to user
             }
-        } catch (IOException e) {
-            e.printStackTrace(); //TODO log to file, not show to user
-        }
 
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Введите название города ");
-        String name = sc.nextLine();
+            City foundedCity = null;
+            for (City city : cities) {
+                if (args[1].equalsIgnoreCase(city.getName())) {
+                    foundedCity = city;
+//                    break;
+                    //}
+                }
 
-        City foundedCity = null;
-        for (City city : cities) {
-            if (name.equalsIgnoreCase(city.getName())) {
-                foundedCity = city;
-                break;
+                if (foundedCity != null) {
+                    System.out.println("Сейчас в " + args[1] + " " + foundedCity.calculateRandomTemperature());
+                    return;
+                }
+            }
+            if (args[0].equals("--city-list")) {
+                try (BufferedReader in = new BufferedReader(new FileReader("C://Dev//Project//coldplace//CityRead.txt"))) {
+                    String line1;
+                    while ((line1 = in.readLine()) != null) {
+                        System.out.println(line1);
+                        System.exit(0);
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+                else System.out.println((new Random().nextInt(1) - 50));
+
+
             }
         }
-
-        if (foundedCity != null) {
-            System.out.println("Сейчас в " + name + " " + foundedCity.calculateRandomTemperature());
-        } else {
-            System.out.println("Сейчас в " + name + " " + (new Random().nextInt(1) - 50));
-        }
-
     }
-}
+

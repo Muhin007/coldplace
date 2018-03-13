@@ -1,8 +1,6 @@
 package com.github.muhin007.coldplace;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -24,7 +22,10 @@ public class Main {
 
             List<City> cities = new ArrayList<>();
 
-            try (BufferedReader reader = new BufferedReader(new FileReader("CityRead.txt"))) {
+            try {
+                File file = new File("C://Dev//Project//coldplace//CityRead.txt");
+                BufferedReader reader = new BufferedReader
+                        (new InputStreamReader(new FileInputStream(file), "UTF8"));
                 String line = reader.readLine();
                 while (line != null) {
                     String[] stringsArray = line.split(",", 3);
@@ -54,16 +55,19 @@ public class Main {
         }
         if (args[0].equals("--city-list")) {
             try {
-
-                FileReader fr = new FileReader("CityRead.txt");
-                BufferedReader reader = new BufferedReader(fr);
+                System.out.println("Города доступные для просмотра:");
+                File file = new File("C://Dev//Project//coldplace//CityRead.txt");
+                BufferedReader reader = new BufferedReader
+                        (new InputStreamReader(new FileInputStream(file), "UTF8"));
                 String line = reader.readLine();
                 while (line != null) {
-                    System.out.println(line);
+                    String[] stringsArray = line.split(",", 3);
+                    String name = stringsArray[0];
+                    System.out.println(name);
                     line = reader.readLine();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                e.printStackTrace();//TODO log to file, not show to user
 
             }
             System.exit(0);
@@ -71,8 +75,5 @@ public class Main {
             System.out.println((new Random().nextInt(101) - 50));
         }
 
-
     }
 }
-
-

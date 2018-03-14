@@ -9,6 +9,11 @@ public class Main {
 
     public static void main(String[] args) {
 
+        if (args.length == 0) {
+            System.out.print("Вы не ввели ни один -ключ, поэтому посмотрите на случайное число ");
+            System.out.println((new Random().nextInt(101) - 50));
+            System.out.println(" и введите -h или --help для получения справки.");
+        }
         if (args[0].equals("-h") || args[0].equals("--help")) {
             System.out.println("Программа Coldplace показывает температуру в запрашиваемом городе");
             System.out.println("-h, --help - помощь в использовании ключей командной строки; " +
@@ -70,10 +75,7 @@ public class Main {
                 e.printStackTrace();//TODO log to file, not show to user
 
             }
-            System.exit(0);
-        } else {
-            System.out.println((new Random().nextInt(101) - 50));
-        }
 
+        }
     }
 }

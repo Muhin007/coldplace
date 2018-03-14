@@ -28,7 +28,7 @@ public class Main {
             List<City> cities = new ArrayList<>();
 
             try {
-                File file = new File("C://Dev//Project//coldplace//CityRead.txt");
+                File file = new File("CityRead.txt");
                 BufferedReader reader = new BufferedReader
                         (new InputStreamReader(new FileInputStream(file), "UTF8"));
                 String line = reader.readLine();
@@ -61,7 +61,7 @@ public class Main {
         if (args[0].equals("--city-list")) {
             try {
                 System.out.println("Города доступные для просмотра:");
-                File file = new File("C://Dev//Project//coldplace//CityRead.txt");
+                File file = new File("CityRead.txt");
                 BufferedReader reader = new BufferedReader
                         (new InputStreamReader(new FileInputStream(file), "UTF8"));
                 String line = reader.readLine();

@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class Main {
 
+
     public static void main(String[] args) {
 
         if (args.length == 0) {
@@ -34,27 +35,13 @@ public class Main {
                     BufferedReader reader = new BufferedReader
                             (new InputStreamReader(new FileInputStream(file), "UTF8"));
                     String line = reader.readLine();
-                    while (line != null) {
-                        String[] stringsArray = line.split(",", 3);
-                        String name = stringsArray[0];
-                        int minTemperature = Integer.parseInt(stringsArray[1].trim());
-                        int maxTemperature = Integer.parseInt(stringsArray[2].trim());
-                        cities.add(new City(name, minTemperature, maxTemperature));
-                        line = reader.readLine();
-                    }
+                    nameCityRead(cities, reader, line);
                 } else {
                     File file = new File("CityRead.txt");
                     BufferedReader reader = new BufferedReader
                             (new InputStreamReader(new FileInputStream(file), "UTF8"));
                     String line = reader.readLine();
-                    while (line != null) {
-                        String[] stringsArray = line.split(",", 3);
-                        String name = stringsArray[0];
-                        int minTemperature = Integer.parseInt(stringsArray[1].trim());
-                        int maxTemperature = Integer.parseInt(stringsArray[2].trim());
-                        cities.add(new City(name, minTemperature, maxTemperature));
-                        line = reader.readLine();
-                    }
+                    nameCityRead(cities, reader, line);
                 }
             } catch (IOException e) {
                 e.printStackTrace(); //TODO log to file, not show to user
@@ -80,30 +67,40 @@ public class Main {
                     BufferedReader reader = new BufferedReader
                             (new InputStreamReader(new FileInputStream(file), "UTF8"));
                     String line = reader.readLine();
-                    while (line != null) {
-                        String[] stringsArray = line.split(",", 3);
-                        String name = stringsArray[0];
-                        System.out.println(name);
-                        line = reader.readLine();
-                    }
+                    nameCityList(reader, line);
                 } else {
                     System.out.println("Города доступные для просмотра:");
                     File file = new File("CityRead.txt");
                     BufferedReader reader = new BufferedReader
                             (new InputStreamReader(new FileInputStream(file), "UTF8"));
                     String line = reader.readLine();
-                    while (line != null) {
-                        String[] stringsArray = line.split(",", 3);
-                        String name = stringsArray[0];
-                        System.out.println(name);
-                        line = reader.readLine();
-                    }
+                    nameCityList(reader, line);
                 }
             } catch (IOException e) {
                 e.printStackTrace();//TODO log to file, not show to user
 
             }
 
+        }
+    }
+
+    private static void nameCityList(BufferedReader reader, String line) throws IOException {
+        while (line != null) {
+            String[] stringsArray = line.split(",", 3);
+            String name = stringsArray[0];
+            System.out.println(name);
+            line = reader.readLine();
+        }
+    }
+
+    private static void nameCityRead(List<City> cities, BufferedReader reader, String line) throws IOException {
+        while (line != null) {
+            String[] stringsArray = line.split(",", 3);
+            String name = stringsArray[0];
+            int minTemperature = Integer.parseInt(stringsArray[1].trim());
+            int maxTemperature = Integer.parseInt(stringsArray[2].trim());
+            cities.add(new City(name, minTemperature, maxTemperature));
+            line = reader.readLine();
         }
     }
 }

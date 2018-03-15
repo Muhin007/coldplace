@@ -17,13 +17,22 @@ public class Main {
         }
         if (args[0].equals("-h") || args[0].equals("--help")) {
             System.out.println("Программа Coldplace показывает температуру в запрашиваемом городе");
-            System.out.println("-h, --help - помощь в использовании ключей командной строки;" +
-                    "-с, --city <Название города> - покажет вам температуру в указанном городе;" +
-                    "--city-list - покажет вам список названий всех доступных городов;" +
-                    "-f и --data-file-path указанные после -с, --city, --city-list позволят указать путь к другому файлу сдругим списком городов" +
+            System.out.println("-h, --help - помощь в использовании ключей командной строки;\n" +
+                    "-с, --city <Название города> - покажет вам температуру в указанном городе;\n" +
+                    "--city-list - покажет вам список названий всех доступных городов;\n" +
+                    "-f и --data-file-path указанные после -с, --city, --city-list позволят \n " +
+                    "указать путь к другому файлу с другим списком городов\n" +
                     " p.s. запуск программы без ключа покажет случайную температуру");
             return;
         }
+
+        String filePath = "CityRead.txt";
+        if (isArgsContainsKey(args, "-f") || isArgsContainsKey(args, "--data-file-path")) {
+            filePath = "TODO";
+            int index = "".indexOf("a");
+        }
+
+
         if (args[0].equals("-c") || args[0].equals("--city")) {
             System.out.println("Программа Coldplace показывает температуру в запрашиваемом городе");
 
@@ -102,5 +111,13 @@ public class Main {
             cities.add(new City(name, minTemperature, maxTemperature));
             line = reader.readLine();
         }
+    }
+    private static boolean isArgsContainsKey(String[] args, String key) {
+        for(int i=0;i<=args.length;i++){
+            if (args[i].equals(key)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -28,9 +28,16 @@ public class Main {
 
         String filePath = "CityRead.txt";
         if (isArgsContainsKey(args, "-f") || isArgsContainsKey(args, "--data-file-path")) {
-            filePath = "TODO";
-            int index = "".indexOf("a");
-        }
+            filePath = "CityReadEng.txt";
+            int index = "a".indexOf(filePath);
+            if (index != -1) {
+                filePath = "CityRead.txt";
+            }
+            else {
+                filePath = "CityReadEng.txt";
+            }
+            return;
+
 
 
         if (args[0].equals("-c") || args[0].equals("--city")) {

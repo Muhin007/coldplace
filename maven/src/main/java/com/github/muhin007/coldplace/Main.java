@@ -2,11 +2,21 @@ package com.github.muhin007.coldplace;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class Main {
 
+        private static int isArgsContainsKey(String[] args, String key) {
+            if (args != null && args.length > 0) {
+                ArrayList<String> list = new ArrayList<>(Arrays.asList(args));
+                int index = list.indexOf(key);
+                list.clear();
+                return index;
+            }
+            return -1;
+    }
 
     public static void main(String[] args) {
 
@@ -32,12 +42,11 @@ public class Main {
             int index = "a".indexOf(filePath);
             if (index != -1) {
                 filePath = "CityRead.txt";
-            }
-            else {
+            } else {
                 filePath = "CityReadEng.txt";
             }
             return;
-
+        }
 
 
         if (args[0].equals("-c") || args[0].equals("--city")) {
@@ -94,9 +103,7 @@ public class Main {
                 }
             } catch (IOException e) {
                 e.printStackTrace();//TODO log to file, not show to user
-
             }
-
         }
     }
 
@@ -118,13 +125,5 @@ public class Main {
             cities.add(new City(name, minTemperature, maxTemperature));
             line = reader.readLine();
         }
-    }
-    private static boolean isArgsContainsKey(String[] args, String key) {
-        for(int i=0;i<=args.length;i++){
-            if (args[i].equals(key)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

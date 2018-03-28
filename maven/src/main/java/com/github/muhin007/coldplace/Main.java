@@ -8,17 +8,8 @@ import java.util.Random;
 
 public class Main {
 
-        private static int isArgsContainsKey(String[] args, String key) {
-            if (args != null && args.length > 0) {
-                ArrayList<String> list = new ArrayList<>(Arrays.asList(args));
-                int index = list.indexOf(key);
-                list.clear();
-                return index;
-            }
-            return -1;
-    }
-
     public static void main(String[] args) {
+
 
         if (args.length == 0) {
             System.out.print("Вы не ввели ни один -ключ, поэтому посмотрите на случайное число ");
@@ -36,13 +27,14 @@ public class Main {
             return;
         }
 
-        String filePath = "CityRead.txt";
-        if (isArgsContainsKey(args, "-f") || isArgsContainsKey(args, "--data-file-path")) {
+        String filePath;
+        if (isArgsContainsKey(args, "-f"){
             filePath = "CityReadEng.txt";
-            int index = "a".indexOf(filePath);
+            int index = indexArgsKey("-f");
             if (index != -1) {
                 filePath = "CityRead.txt";
-            } else {
+            }
+            else {
                 filePath = "CityReadEng.txt";
             }
             return;
@@ -126,4 +118,20 @@ public class Main {
             line = reader.readLine();
         }
     }
+    private static boolean isArgsContainsKey(String[] args, String key) {
+        for(int i=0;i<=args.length;i++){
+            if (args[i].equals(key)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private static int indexArgsKey(String[]args) {
+        int index = Arrays.asList(args).indexOf(args);
+        if (index >= 0) {
+            return index;
+        }
+    return -1;
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.github.muhin007.coldplace;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,9 +11,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String[] key = new String[2];
-        key[0] = "-c";
-        key[1] = "-f";
 
         if (args.length == 0) {
             System.out.print("Вы не ввели ни один -ключ, поэтому посмотрите на случайное число ");
@@ -24,116 +22,91 @@ public class Main {
             System.out.println("-h, --help - помощь в использовании ключей командной строки;\n" +
                     "-с, --city <Название города> - покажет вам температуру в указанном городе;\n" +
                     "--city-list - покажет вам список названий всех доступных городов;\n" +
-                    "-f и --data-file-path указанные после -с, --city, --city-list позволят \n " +
-                    "указать путь к другому файлу с другим списком городов\n" +
+                    "-f, --data-file-path <Название файла с городами> позволят указать\n " +
+                    "путь к другому файлу с другим списком городов\n" +
                     " p.s. запуск программы без ключа покажет случайную температуру");
             return;
         }
 
-        String filePath = null;
-        if (isArgsContainsKey(args, "-f")) {
-            filePath = "CityReadEng.txt";
-            int index = indexArgsKey("-f");
-            if (index != -1) {
-                filePath = "CityRead.txt";
-            } else {
-                filePath = "CityReadEng.txt";
-            }
-            return;
+        String filePath = "CityRead.txt";
+        int indexKeyF = indexArgsKey(args, "-f", "--data-file-path");
+        if (indexKeyF >= 0) {
+            filePath = args[indexKeyF + 1];
         }
 
+        String cityName = null;
+        int indexKeyC = indexArgsKey(args, "-c", "--city");
+        if (indexKeyC >= 0) {
+            if (args.length > indexKeyC + 1) {
+                cityName = args[indexKeyC + 1];
 
-        if (args[0].equals("-c") || args[0].equals("--city")) {
-            System.out.println("Программа Coldplace показывает температуру в запрашиваемом городе");
-
-            List<City> cities = new ArrayList<>();
-
-            try {
-                if (args[1].equals("-f") || args[1].equals("--data-file-path")) {
-                    File file = new File(filePath);
-                    BufferedReader reader = new BufferedReader
-                            (new InputStreamReader(new FileInputStream(file), "UTF8"));
-                    String line = reader.readLine();
-                    nameCityRead(cities, reader, line);
-                } else {
-                    File file = new File(filePath);
-                    BufferedReader reader = new BufferedReader
-                            (new InputStreamReader(new FileInputStream(file), "UTF8"));
-                    String line = reader.readLine();
-                    nameCityRead(cities, reader, line);
+                List<City> cities = readCities(filePath);
+                City foundedCity = null;
+                for (City city : cities) {
+                    if (cityName.equalsIgnoreCase(city.getName())) { //todo
+                        foundedCity = city;
+                        break;
+                    }
                 }
-            } catch (IOException e) {
-                e.printStackTrace(); //TODO log to file, not show to user
-            }
-            City foundedCity = null;
-            for (City city : cities) {
-                if (args[1].equalsIgnoreCase(city.getName())) {
-                    foundedCity = city;
-                    break;
+                if (foundedCity != null) {
+                    System.out.println("Сейчас в " + cityName + " " + foundedCity.calculateRandomTemperature());
+                    return;
                 }
-            }
-
-            if (foundedCity != null) {
-                System.out.println("Сейчас в " + args[1] + " " + foundedCity.calculateRandomTemperature());
+            } else {
+                System.out.println("Вы не указали название города");
                 return;
             }
         }
-        if (args[0].equals("--city-list")) {
+        int indexKeyCL = indexArgsKey(args, "-c-l", "--city-list");
+        if (indexKeyCL >= 0) {
             try {
-                if (args[1].equals("-f") || args[1].equals("--data-file-path")) {
-                    System.out.println("Города доступные для просмотра:");
-                    File file = new File(args[2]);
-                    BufferedReader reader = new BufferedReader
-                            (new InputStreamReader(new FileInputStream(file), "UTF8"));
-                    String line = reader.readLine();
-                    nameCityList(reader, line);
-                } else {
-                    System.out.println("Города доступные для просмотра:");
-                    File file = new File("CityRead.txt");
-                    BufferedReader reader = new BufferedReader
-                            (new InputStreamReader(new FileInputStream(file), "UTF8"));
-                    String line = reader.readLine();
-                    nameCityList(reader, line);
+                File file = new File(filePath);
+                BufferedReader reader = new BufferedReader
+                        (new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8.name()));
+                String line = reader.readLine();
+                while (line != null) {
+                    String[] stringsArray = line.split(",", 3);
+                    String cities = stringsArray[0];
+                    System.out.println(cities);
+                    line = reader.readLine();
                 }
             } catch (IOException e) {
-                e.printStackTrace();//TODO log to file, not show to user
+                e.printStackTrace();
             }
         }
     }
 
-    private static void nameCityList(BufferedReader reader, String line) throws IOException {
-        while (line != null) {
-            String[] stringsArray = line.split(",", 3);
-            String name = stringsArray[0];
-            System.out.println(name);
-            line = reader.readLine();
-        }
-    }
-
-    private static void nameCityRead(List<City> cities, BufferedReader reader, String line) throws IOException {
-        while (line != null) {
-            String[] stringsArray = line.split(",", 3);
-            String name = stringsArray[0];
-            int minTemperature = Integer.parseInt(stringsArray[1].trim());
-            int maxTemperature = Integer.parseInt(stringsArray[2].trim());
-            cities.add(new City(name, minTemperature, maxTemperature));
-            line = reader.readLine();
-        }
-    }
-
-    private static boolean isArgsContainsKey(String[] args, String key) {
-        for (int i = 0; i <= args.length; i++) {
-            if (args[i].equals(key)) {
-                return true;
+    private static List<City> readCities(String filePath) {
+        List<City> cities = new ArrayList<>();
+        try {
+            File file = new File(filePath);
+            BufferedReader reader = new BufferedReader
+                    (new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8.name()));
+            String line = reader.readLine();
+            while (line != null) {
+                String[] stringsArray = line.split(",", 3);
+                String name = stringsArray[0];
+                int minTemperature = Integer.parseInt(stringsArray[1].trim());
+                int maxTemperature = Integer.parseInt(stringsArray[2].trim());
+                cities.add(new City(name, minTemperature, maxTemperature));
+                line = reader.readLine();
             }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return false;
+        return cities;
     }
 
-    private static int indexArgsKey(String key) {
-        int index = Arrays.asList(key).indexOf(key);
-        if (index >= 0) {
-            return index;
+
+    private static int indexArgsKey(String[] args, String key, String longKey) {
+        int indexKey = Arrays.asList(args).indexOf(key);
+        if (indexKey >= 0) {
+            return indexKey;
+        }
+        int indexLongKey = Arrays.asList(args).indexOf(longKey);
+        if (indexLongKey >= 0) {
+            return indexLongKey;
         }
         return -1;
     }

@@ -10,6 +10,9 @@ public class Main {
 
     public static void main(String[] args) {
 
+        String[] key = new String[2];
+        key[0] = "-c";
+        key[1] = "-f";
 
         if (args.length == 0) {
             System.out.print("Вы не ввели ни один -ключ, поэтому посмотрите на случайное число ");
@@ -27,14 +30,13 @@ public class Main {
             return;
         }
 
-        String filePath;
-        if (isArgsContainsKey(args, "-f"){
+        String filePath = null;
+        if (isArgsContainsKey(args, "-f")) {
             filePath = "CityReadEng.txt";
             int index = indexArgsKey("-f");
             if (index != -1) {
                 filePath = "CityRead.txt";
-            }
-            else {
+            } else {
                 filePath = "CityReadEng.txt";
             }
             return;
@@ -48,13 +50,13 @@ public class Main {
 
             try {
                 if (args[1].equals("-f") || args[1].equals("--data-file-path")) {
-                    File file = new File(args[2]);
+                    File file = new File(filePath);
                     BufferedReader reader = new BufferedReader
                             (new InputStreamReader(new FileInputStream(file), "UTF8"));
                     String line = reader.readLine();
                     nameCityRead(cities, reader, line);
                 } else {
-                    File file = new File("CityRead.txt");
+                    File file = new File(filePath);
                     BufferedReader reader = new BufferedReader
                             (new InputStreamReader(new FileInputStream(file), "UTF8"));
                     String line = reader.readLine();
@@ -118,20 +120,22 @@ public class Main {
             line = reader.readLine();
         }
     }
+
     private static boolean isArgsContainsKey(String[] args, String key) {
-        for(int i=0;i<=args.length;i++){
+        for (int i = 0; i <= args.length; i++) {
             if (args[i].equals(key)) {
                 return true;
             }
         }
         return false;
     }
-    private static int indexArgsKey(String[]args) {
-        int index = Arrays.asList(args).indexOf(args);
+
+    private static int indexArgsKey(String key) {
+        int index = Arrays.asList(key).indexOf(key);
         if (index >= 0) {
             return index;
         }
-    return -1;
+        return -1;
     }
 
 }

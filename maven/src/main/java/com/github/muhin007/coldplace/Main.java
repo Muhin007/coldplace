@@ -21,7 +21,7 @@ public class Main {
             System.out.println("Программа Coldplace показывает температуру в запрашиваемом городе");
             System.out.println("-h, --help - помощь в использовании ключей командной строки;\n" +
                     "-с, --city <Название города> - покажет вам температуру в указанном городе;\n" +
-                    "--city-list - покажет вам список названий всех доступных городов;\n" +
+                    "-c-l, --city-list - покажет вам список названий всех доступных городов;\n" +
                     "-f, --data-file-path <Название файла с городами> позволят указать\n " +
                     "путь к другому файлу с другим списком городов\n" +
                     " p.s. запуск программы без ключа покажет случайную температуру");
@@ -43,17 +43,27 @@ public class Main {
                 List<City> cities = readCities(filePath);
                 City foundedCity = null;
                 for (City city : cities) {
-                    if (cityName.equalsIgnoreCase(city.getName())) { //todo
+                    if (cityName.equalsIgnoreCase(city.getName())) {
                         foundedCity = city;
+                        /*
+                        Если этот код поместить сюда, то он попадает под цикл и выдает сообщение много раз.
+                        } else {
+                        System.out.println("Города нет в списке. Обратитесь к справке о программе (-h, --help)\n" +
+                                "для получения списка городов.");
+                        }
+                        Если этот код поставит перед break, то перестает искать города в файле и всегда выдает
+                        сообщение.
+                         */
                         break;
                     }
                 }
+
                 if (foundedCity != null) {
                     System.out.println("Сейчас в " + cityName + " " + foundedCity.calculateRandomTemperature());
                     return;
                 }
             } else {
-                System.out.println("Вы не указали название города");
+                System.out.println("Вы не указали название города");// данное условие не работает
                 return;
             }
         }

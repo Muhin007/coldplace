@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Random;
 
 public class Main {
-
     public static void main(String[] args) {
 
 
@@ -45,15 +44,7 @@ public class Main {
                 for (City city : cities) {
                     if (cityName.equalsIgnoreCase(city.getName())) {
                         foundedCity = city;
-                        /*
-                        Если этот код поместить сюда, то он попадает под цикл и выдает сообщение много раз.
-                        } else {
-                        System.out.println("Города нет в списке. Обратитесь к справке о программе (-h, --help)\n" +
-                                "для получения списка городов.");
-                        }
-                        Если этот код поставит перед break, то перестает искать города в файле и всегда выдает
-                        сообщение.
-                         */
+
                         break;
                     }
                 }
@@ -62,8 +53,13 @@ public class Main {
                     System.out.println("Сейчас в " + cityName + " " + foundedCity.calculateRandomTemperature());
                     return;
                 }
+                if (foundedCity == null){
+                    return;
+                }
+
             } else {
-                System.out.println("Вы не указали название города");// данное условие не работает
+                System.out.println("Вы не указали название города или его нет в списке.\n" +
+                        "Обратитесь -h, --help для получения справки.");
                 return;
             }
         }

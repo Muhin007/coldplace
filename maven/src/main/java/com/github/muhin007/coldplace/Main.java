@@ -21,7 +21,7 @@ public class Main {
             System.out.println("Программа Coldplace показывает температуру в запрашиваемом городе");
             System.out.println("-h, --help - помощь в использовании ключей командной строки;\n" +
                     "-с, --city <Название города> - покажет вам температуру в указанном городе;\n" +
-                    "-c-l, --city-list - покажет вам список названий всех доступных городов;\n" +
+                    "-l, --city-list - покажет вам список названий всех доступных городов;\n" +
                     "-f, --data-file-path <Название файла с городами> позволят указать\n " +
                     "путь к другому файлу с другим списком городов\n" +
                     " p.s. запуск программы без ключа покажет случайную температуру");
@@ -67,7 +67,7 @@ public class Main {
                 return;
             }
         }
-        int indexKeyCL = indexArgsKey(args, "-c-l", "--city-list");
+        int indexKeyCL = indexArgsKey(args, "-l", "--city-list");
         if (indexKeyCL >= 0) {
             try {
                 File file = new File(filePath);

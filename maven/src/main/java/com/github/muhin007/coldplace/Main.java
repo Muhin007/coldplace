@@ -54,7 +54,8 @@ public class Main {
                     return;
                 }
                 if (foundedCity == null){
-                    return;
+                    System.out.println("Вы не указали название города или его нет в списке.\n" +
+                            "Обратитесь -h, --help для получения справки.");
                 }
 
             } else {

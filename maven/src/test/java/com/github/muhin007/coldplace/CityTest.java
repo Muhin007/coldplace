@@ -1,5 +1,6 @@
 package com.github.muhin007.coldplace;
 
+
 import org.junit.Assert;
 import org.junit.Test;
 

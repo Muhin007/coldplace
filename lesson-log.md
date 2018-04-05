@@ -1,3 +1,13 @@
+011. 2018/04/05
+Приняли пулл-реквест ветки COLD-10. Смержили ветку COLD-10. Перевели проект "Сoldplace" в UNIX-Style.
+Решили, что работа над консольной версией пока закончена.
+Решили сделать новый проект "Coldplace-WEB", который будет выполнен ввиде сервлета.
+Для изучения сервлетов используется материал по ссылкам: https://stepik.org/course/146/syllabus
+                                                         https://github.com/vitaly-chibrikov/stepic_java_webserver
+Задание: 1. Выполнить 1 часть кода из https://github.com/vitaly-chibrikov/stepic_java_webserver.
+         2. Изучить SSH.
+         3. Изучить Jetty.
+
 010. 2018/03/29
 Продолжили работу над переводом программы "Coldplace" в UNIX-Style.
 

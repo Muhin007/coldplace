@@ -1,0 +1,13 @@
+Moskow, -20, -5
+Chelyabinsk, -25, -10
+Saint-Petersburg, -15, 0
+Novosibirsk, -25, -15
+Magadan, -40, -20
+Sochi, 0, 15
+Kazan, -10, 5
+Nizhny Novgorod, -12, -1
+Omsk, -28, -12
+Ekaterinburg, -26, -13
+Tyumen, -27, -14
+Barnaul, 30, 60
+Vladivostok, -18, -4
